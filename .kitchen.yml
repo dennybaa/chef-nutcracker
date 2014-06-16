@@ -1,0 +1,27 @@
+---
+driver:
+  name: docker
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-12.04
+  - name: centos-6.4
+
+suites:
+  - name: default
+    run_list:
+      - recipe[nutcracker::default]
+    attributes:
+      nutcracker:
+        config:
+          default:
+            listen: 127.0.0.1:1140
+            hash: hsieh
+            distribution: ketama
+            auto_eject_hosts: false
+            timeout: 400
+            redis: true
+            servers:
+              - 127.0.0.1:6379:1
